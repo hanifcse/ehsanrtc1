@@ -13,7 +13,7 @@ const { v4: uuid } = require("uuid");
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 
-app.use("/peerjs", peerServer);
+app.use("/peer.js", peerServer);
 app.get("/", (req, res) => {
   res.redirect(`${uuid()}`);
 });
