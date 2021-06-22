@@ -10,7 +10,7 @@ var peer = new Peer(undefined, {
   host: "/",
   port: "443",
 
-  // when we run local we must be port enable and when we deploy it must be disable below port
+  // when we run code in local server we must be port enable and when we deploy it must be disable below port
   // port: 3030,  
 });
 
