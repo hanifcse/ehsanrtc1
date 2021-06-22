@@ -10,7 +10,8 @@ var peer = new Peer(undefined, {
   host: "/",
   port: "443",
 
-  // port: 3030,
+  // when we run local we must be port enable and when we deploy it must be disable below port
+  // port: 3030,  
 });
 
 let myVideoStream;

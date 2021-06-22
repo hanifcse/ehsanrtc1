@@ -15,21 +15,27 @@
 
 .main__videos {
     flex-grow: 1;
-    background-color: black;
+    background-color: #2541B2;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 40px;
 }
+video{
+    height: 300px;
+    width: 400px;
+    margin: 20px;
+    border: 10px solid #1768AC;
+    border-radius: 10px;
+}
 
 .main__controls {
-    background-color: #1C1E20;
+    background-color: #03256C;
 }
 
 .main__right {
-    background-color: #242324;
-    /* background-color: red; */
-    border-left: 1px solid #3D3D42;
+    background-color: #1768AC;
+    border-left: 1px solid #03256C;
 }
 
 .main__controls {
@@ -54,8 +60,16 @@
 }
 
 .main__controls__button:hover {
-    background-color: #343434;
+    background-color: #1768AC;
     border-radius: 5px;
+}
+.leave_btn{
+    background-color: #ff0000b2;
+    font-weight: 700;
+    transition: all 600ms;
+}
+.leave_btn:hover{
+    background-color: #ff0000;
 }
 
 .main__controls__button i {
@@ -68,14 +82,17 @@
 }
 
 .main__header {
-    padding-top: 5px;
+    padding: 20px 0;
     color: #F5F5F5;
+    background-color: #03256C;
     text-align: center;
+    font-weight: 700;
 }
 
 .main__chat_window {
     flex-grow: 1;
     overflow-y: auto;
+    padding-top: 10px;
 }
 
 .messages{
@@ -96,10 +113,24 @@
 }
 
 .leave_meeting {
-    color: #EB534B;
+    color: #fff;
 }
 
 .unmute, .stop {
     color: #CC3B33;
 }
+
+/* for placeholder color change */
+::placeholder {
+    color: #fff;
+    opacity: 1; /* Firefox */
+  }
+  
+  :-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color: #fff;
+  }
+  
+  ::-ms-input-placeholder { /* Microsoft Edge */
+   color: #fff;
+  }
 
