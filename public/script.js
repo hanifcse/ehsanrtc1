@@ -2,6 +2,8 @@ const socket = io("/");
 
 const videoGrid = document.getElementById("video-grid");
 
+const all_messages = document.getElementById("all_messages");
+
 const myVideo = document.createElement("video");
 myVideo.muted = true;
 
@@ -11,7 +13,7 @@ var peer = new Peer(undefined, {
   port: "443",
 
   // when we run code in local server we must be port enable and when we deploy it must be disable below port
-  // port: 3030,  
+  // port: 3030,
 });
 
 let myVideoStream;
@@ -55,8 +57,6 @@ const connectToNewUser = (userId, stream) => {
 
 // Add video streaming
 const addVideoStream = (video, stream) => {
-
-
   video.srcObject = stream;
   video.addEventListener("loadedmetadata", () => {
     video.play();
@@ -76,6 +76,7 @@ $("html").keydown((e) => {
 
 // Display message from the server (Important)
 socket.on("createMessage", (message) => {
+  // console.log(message);
   $(".messages").append(`<li class='message'><b>user</b> <br/>${message}</li>`);
 
   scrollToBottom();
@@ -140,3 +141,24 @@ const setPlayVideo = () => {
   `;
   document.querySelector(".main__video_button").innerHTML = html;
 };
+
+
+// Share Screen
+
+
+const shareScreen = () => {
+  const askFromBrowser = { "video": true };
+
+  navigator.mediaDevices.getDisplayMedia(askFromBrowser)
+    .then(function (FileStream) {
+      let video = document.querySelector("video");
+      video.srcObject = FileStream;
+      video.play();
+
+
+
+    })
+    .catch(function (err) {
+      alert("error");
+    })
+}
