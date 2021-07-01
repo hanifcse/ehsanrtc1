@@ -4,14 +4,19 @@
 }
 
 .main__left {
-    flex: 0.8;
+    flex: 1;
     display: flex;
     flex-direction: column;
+    /* transition: all 200ms; */
 }
 
 .main__right {
-    flex: 0.2;
-    /* flex-direction: column; */
+    /* flex: 0.2; */
+    flex-direction: column;
+    /* display: flex; */
+    display: none;
+    background-color: #1768AC;
+    border-left: 1px solid #03256C;
 }
 
 .main__videos {
@@ -22,22 +27,25 @@
     align-items: center;
     padding: 40px;
 }
-video{
+
+video {
     height: 300px;
     width: 400px;
     margin: 20px;
     border: 10px solid #1768AC;
     border-radius: 10px;
+    /* -webkit-transform: scaleX(-1);
+    transform: scaleX(-1); */
 }
 
 .main__controls {
     background-color: #03256C;
 }
 
-.main__right {
+/* .main__right {
     background-color: #1768AC;
     border-left: 1px solid #03256C;
-}
+} */
 
 .main__controls {
     color: #D2D2D2;
@@ -64,12 +72,14 @@ video{
     background-color: #1768AC;
     border-radius: 5px;
 }
-.leave_btn{
+
+.leave_btn {
     background-color: #ff0000b2;
     font-weight: 700;
     transition: all 600ms;
 }
-.leave_btn:hover{
+
+.leave_btn:hover {
     background-color: #ff0000;
 }
 
@@ -77,10 +87,10 @@ video{
     font-size: 24px;
 }
 
-.main__right {
+/* .main__right {
     display: flex;
     flex-direction: column;
-}
+} */
 
 .main__header {
     padding: 20px 0;
@@ -96,7 +106,7 @@ video{
     padding-top: 10px;
 }
 
-.messages{
+.messages {
     color: white !important;
     list-style: none;
 }
@@ -122,16 +132,36 @@ video{
 }
 
 /* for placeholder color change */
+
 ::placeholder {
     color: #fff;
-    opacity: 1; /* Firefox */
-  }
-  
-  :-ms-input-placeholder { /* Internet Explorer 10-11 */
-   color: #fff;
-  }
-  
-  ::-ms-input-placeholder { /* Microsoft Edge */
-   color: #fff;
-  }
+    opacity: 1;
+    /* Firefox */
+}
 
+:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: #fff;
+}
+
+::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: #fff;
+}
+
+
+/* Flip Screen */
+.mystyle{
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
+
+/* Chat hidden */
+
+.chatHidden{
+    display: flex;
+    flex: 0.2;
+}
+.flexChange{
+    flex: 0.8;
+}

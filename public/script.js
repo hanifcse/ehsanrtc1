@@ -13,7 +13,7 @@ var peer = new Peer(undefined, {
   port: "443",
 
   // when we run code in local server we must be port enable and when we deploy it must be disable below port
-  // port: 3030,
+  port: 3030,
 });
 
 let myVideoStream;
@@ -161,4 +161,21 @@ const shareScreen = () => {
     .catch(function (err) {
       alert("error");
     })
+}
+
+
+// Flip Screen
+
+const flipScreen = () => {
+  const video = document.querySelector('video');
+  video.classList.toggle("mystyle");
+}
+
+// Chat Hidden
+
+const chatShow = () => {
+  const mainRight = document.querySelector('.main__right');
+  const mainLeft = document.querySelector('.main__left');
+  mainRight.classList.toggle("chatHidden");
+  mainLeft.classList.toggle("flexChange");
 }
