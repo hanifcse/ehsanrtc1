@@ -165,3 +165,14 @@ video {
 .flexChange{
     flex: 0.8;
 }
+
+/* Screen record */
+
+.stop-recording {
+    visibility: hidden;
+  }
+  .record-btn {
+    position: absolute;
+    visibility: hidden;
+    display: none;
+  }

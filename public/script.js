@@ -13,7 +13,7 @@ var peer = new Peer(undefined, {
   port: "443",
 
   // when we run code in local server we must be port enable and when we deploy it must be disable below port
-  // port: 3030,
+  port: 3030,
 });
 
 let myVideoStream;
@@ -145,7 +145,6 @@ const setPlayVideo = () => {
 
 // Share Screen
 
-
 const shareScreen = () => {
   const askFromBrowser = { "video": true };
 
@@ -171,6 +170,7 @@ const flipScreen = () => {
   video.classList.toggle("mystyle");
 }
 
+
 // Chat Hidden
 
 const chatShow = () => {
@@ -179,3 +179,62 @@ const chatShow = () => {
   mainRight.classList.toggle("chatHidden");
   mainLeft.classList.toggle("flexChange");
 }
+
+// Video Recording
+
+let constrainObj = {
+  audio: true,
+  video: true,
+};
+navigator.mediaDevices
+  .getUserMedia(constrainObj)
+  .then((recordStream) => {
+    let mediaRecorder = new MediaRecorder(recordStream);
+    let chunks = [];
+
+    $("#record-video").on("click", (ev) => {
+      // style
+      $("#stop-record").toggleClass("stop-recording");
+      $("#record-video").toggleClass("record-btn");
+
+      mediaRecorder.start();
+      console.log(mediaRecorder.state);
+    });
+
+    $("#stop-record").on("click", (ev) => {
+      // style
+      $("#stop-record").toggleClass("stop-recording");
+      $("#record-video").toggleClass("record-btn");
+
+      $("#recorded-video").toggleClass("recorded-modal");
+
+      mediaRecorder.stop();
+      console.log(mediaRecorder.state);
+    });
+    mediaRecorder.ondataavailable = function (ev) {
+      chunks.push(ev.data);
+    };
+
+    mediaRecorder.onstop = (ev) => {
+      let blob = new Blob(chunks, { type: "video/mp4;" });
+      chunks = [];
+      let videoURL = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.style.display = "none";
+      a.href = videoURL;
+      a.download = "test.mp4";
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(() => {
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(videoURL);
+      }, 100);
+    };
+  })
+  .catch((error) => {
+    console.log(error.name, error.message);
+  });
+
+
+
+
