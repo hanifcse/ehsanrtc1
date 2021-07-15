@@ -28,7 +28,7 @@ io.on("connection", (socket) => {
   // show total participant
   let totalParticipant = io.engine.clientsCount;
   socket.emit('participant', totalParticipant);
-  
+
   socket.on("join-room", (roomId, userId) => {
     socket.join(roomId);
     socket.broadcast.to(roomId).emit("user-connected", userId);
