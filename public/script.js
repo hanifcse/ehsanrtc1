@@ -215,7 +215,26 @@ navigator.mediaDevices
       chunks.push(ev.data);
     };
 
+    // new code
+
+    // download video if user closes tab or browser  
+    window.addEventListener("beforeunload", function (ev) {
+      mediaRecorder.stop();
+      mediaRecorder.onstop = (ev) => {
+        downloadRecordedVideo(ev);
+      };
+      // Show warning before closing the tab
+
+      // ev.preventDefault();
+      // ev.returnValue = "";
+    });
+    // 
+
     mediaRecorder.onstop = (ev) => {
+      downloadRecordedVideo(ev);
+    };
+
+    const downloadRecordedVideo = (ev) => {
       let blob = new Blob(chunks, { type: "video/mp4;" });
       chunks = [];
       let videoURL = window.URL.createObjectURL(blob);
@@ -225,10 +244,6 @@ navigator.mediaDevices
       a.download = "test.mp4";
       document.body.appendChild(a);
       a.click();
-      setTimeout(() => {
-        document.body.removeChild(a);
-        window.URL.revokeObjectURL(videoURL);
-      }, 100);
     };
   })
   .catch((error) => {
