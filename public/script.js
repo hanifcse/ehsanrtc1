@@ -236,5 +236,10 @@ navigator.mediaDevices
   });
 
 
+// Participant count
 
+socket.on("participant", (participants) => {
+  console.log(participants);
+  $("#participants").append(`<span>Participants : ${participants}</span>`);
+})
 
