@@ -16,14 +16,39 @@ app.use(express.static("public"));
 app.use("/peerjs", peerServer);
 app.get("/", (req, res) => {
   res.redirect(`${uuid()}`);
+  // console.log(req.query);
 });
 
 app.get("/:room", (req, res) => {
   res.render("room", { roomId: req.params.room });
+  console.log("Passcode: ", req.query);
+
+  
 });
+
+
+
+// new code for query string
+// app.get("/:room", (req, res) => {
+//   res.render("room", { roomId: req.params.room });
+//   console.log("New Password: ", req.query);
+// })
+
+
+// 
+
+// new code
+// io.on("connection", (socket) => {
+//   socket.leave("room 237");
+
+//   io.to("room 237").emit(`user ${socket.id} has left the room`);
+// });
+// 
 
 // join the room
 io.on("connection", (socket) => {
+  // console.log("New user connected!!");
+  // console.log(io.sockets.sockets);
 
   // show total participant
   let totalParticipant = io.engine.clientsCount;
@@ -35,10 +60,74 @@ io.on("connection", (socket) => {
 
     socket.on("message", (message) => {
       io.to(roomId).emit("createMessage", message);
-      console.log(message);
+      console.log("Message: ", message);
     });
 
   });
+  console.log("object========================================================================");
+  // socket.on("disconnect", function () {
+  //   console.log("user disconnected!");
+  // })
+
+  // socket.on('disconnect', () => {
+  //   socket.to(roomId).broadcast.emit('user-disconnected', userId)
+  // })
+
+  // setTimeout(function () {
+  //   // socket.send("Hello Hanif I am Robot!!");
+
+  //   // io.sockets.sockets[socket.id].disconnect();
+  //   // console.log("Hello Ehsan Software");
+
+  //   if (io.sockets.sockets[socket.id]) {
+  //     console.log("Before disconnecting message");
+  //     // console.log("Hello Hanif", io.sockets.sockets[socket.id]);
+  //     io.sockets.sockets[socket.id].disconnect();
+  //     console.log("Disconnected successfully again2!");
+  //     // return socket;
+  //     // window.location.reload(true);
+  //   }
+  // }, 10000)
+
+  // socket.on("disconnect", function() {
+  //   emitVisitors();
+  //   console.log("user disconnected");
+  // });
+
+  // 
+  // socket.leave("room 237");
+
+  // io.to("room 237").emit(`user ${socket.id} has left the room`);
+
+  // console.log("socket ID ",socket.id);
+
+  // New
+
+
+  // socket.on("disconnect", (discon) => {
+  //   if (discon == 1) {
+  //     if (io.sockets.sockets[socket.id]) {
+  //       console.log("Before disconnecting message");
+  //       console.log("Hello Hanif", io.sockets.sockets[socket.id]);
+  //       // io.sockets.sockets[socket.id].disconnect();
+  //       console.log("Disconnected successfully!");
+  //     }
+
+  //   }
+
+  // });
+
+  // if (io.sockets.sockets[socket.id]) {
+  //   console.log("Before disconnecting message");
+  //   console.log("Hello Hanif", io.sockets.sockets[socket.id]);
+  //   // io.sockets.sockets[socket.id].disconnect();
+  //   console.log("Disconnected successfully!");
+  // }
+
+
+
 });
+
+
 
 server.listen(process.env.PORT || 3030);

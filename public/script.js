@@ -1,4 +1,5 @@
 const socket = io("/");
+// const socket = io({transports: ['websocket'], upgrade: false});
 
 const videoGrid = document.getElementById("video-grid");
 
@@ -13,7 +14,7 @@ var peer = new Peer(undefined, {
   port: "443",
 
   // when we run code in local server we must be port enable and when we deploy it must be disable below port
-  // port: 3030,
+  port: 3030,
 });
 
 let myVideoStream;
@@ -38,16 +39,19 @@ navigator.mediaDevices
 
     socket.on("user-connected", (userId) => {
       connectToNewUser(userId, stream);
+      console.log(userId);
     });
   });
 
 //joining room
 peer.on("open", (id) => {
+  console.log("Check", id);
   socket.emit("join-room", ROOM_ID, id);
 });
 
 // Make a call to the new user
 const connectToNewUser = (userId, stream) => {
+  console.log(userId);
   const call = peer.call(userId, stream);
   const video = document.createElement("video");
   call.on("stream", (userVideoStream) => {
@@ -64,8 +68,9 @@ const addVideoStream = (video, stream) => {
   videoGrid.append(video);
 };
 
+
 // Take Message Input from user
-let text = $("input");
+let text = $("#chat_message");
 
 $("html").keydown((e) => {
   if (e.which == 13 && text.val().length !== 0) {
@@ -81,6 +86,13 @@ socket.on("createMessage", (message) => {
 
   scrollToBottom();
 });
+
+
+// Test code for showing message in the UI
+
+// socket.on("message", function (msg1) {
+//   document.write(msg1);
+// })
 
 const scrollToBottom = () => {
   let d = $(".main__chat_window");
@@ -257,4 +269,168 @@ socket.on("participant", (participants) => {
   console.log(participants);
   $("#participants").append(`<span>Participants : ${participants}</span>`);
 })
+
+
+
+// Disconnecting participant
+
+console.log(socket);
+console.log(socket.connected);
+console.log(socket.disconnected);
+console.log(socket?.id);
+console.log("socket ID of Participant",socket.id);
+function disconnectParticipant(socket) {
+  console.log("I am clicked!");
+  // console.log(socket);
+  // console.log(io?.sockets);
+  // location.href='/';
+
+  // socket.on('kick', function (client) {
+  //   if (typeof io.sockets.sockets[client] != 'undefined') {
+  //     socket.emit('message', { text: nickNames[socket.id] + ' kicked: ' + nickNames[client] });
+  //     io.sockets.sockets[client].disconnect();
+  //   } else {
+  //     socket.emit('message', { text: 'User: ' + name + ' does not exist.' });
+  //   }
+  // });
+
+
+  // new
+
+  // console.log(io.sockets);
+  // if (io?.sockets?.sockets[socket.id]) {
+  //   io.sockets.sockets[socket.id].disconnect();
+  //   console.log("Disconnected successfully!")
+  // }
+
+}
+
+//  socket.on('kick', function (client) {
+//     if (typeof io.sockets.sockets[client] != 'undefined') {
+//       socket.emit('message', { text: nickNames[socket.id] + ' kicked: ' + nickNames[client] });
+//       io.sockets.sockets[client].disconnect();
+//     } else {
+//       socket.emit('message', { text: 'User: ' + name + ' does not exist.' });
+//     }
+//   });
+
+
+// console.log(io.sockets);
+// if (io.sockets.sockets[socket.id]) {
+//   io.sockets.sockets[socket.id].disconnect();
+//   console.log("Disconnected successfully!")
+// }
+
+
+
+// New code 26.07.2021
+
+
+$("#disconnectPeople").click(function () {
+  location.href = '/';
+  // alert("Hello");
+
+  // socket.emit("disconnect", 1);
+  
+})
+
+
+// socket.on('user-disconnected', userId => {
+//   if (peers[userId]) peers[userId].close()
+// })
+
+
+
+// New code s
+
+// When the user clicks on div, open the popup
+const passwordGenerator = password_generator();
+function clickToPopUp() {
+  let popup = document.getElementById("myPopup");
+  popup.classList.toggle("show");
+  document.getElementById(
+    "myInput"
+  ).value = `http://localhost:3030/${ROOM_ID}?pass=${passwordGenerator}`; //set value on myInputID
+}
+// click to copy Function
+function clickToCopy() {
+  var copyText = document.getElementById("myInput");
+  copyText.select();
+  copyText.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  // alert("Copied the text: " + copyText.value);
+}
+
+// modal
+// Get the modal
+const modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+const btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+const span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal
+btn.onclick = function () {
+  modal.style.display = "block";
+};
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function () {
+  modal.style.display = "none";
+};
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function (event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+};
+$("#addRoomID").html(
+  `Room ID: ${ROOM_ID} </br> Password: ${passwordGenerator} 
+  </br>
+  Live Link: http://localhost:3030/${ROOM_ID}?pass=${passwordGenerator}
+  `
+);
+
+// Random Password Function
+function password_generator(len) {
+  var length = len ? len : 10;
+  var string = "abcdefghijklmnopqrstuvwxyz"; //to upper
+  var numeric = "0123456789";
+  var punctuation = "!@$%&*()+~}{[]:;?></";
+  var password = "";
+  var character = "";
+  var crunch = true;
+  while (password.length < length) {
+    entity1 = Math.ceil(string.length * Math.random() * Math.random());
+    entity2 = Math.ceil(numeric.length * Math.random() * Math.random());
+    entity3 = Math.ceil(punctuation.length * Math.random() * Math.random());
+    hold = string.charAt(entity1);
+    hold = password.length % 2 == 0 ? hold.toUpperCase() : hold;
+    character += hold;
+    character += numeric.charAt(entity2);
+    character += punctuation.charAt(entity3);
+    password = character;
+  }
+  password = password
+    .split("")
+    .sort(function () {
+      return 0.5 - Math.random();
+    })
+    .join("");
+  return password.substr(0, len);
+}
+
+
+// 
+
+console.log("Whole Link:", window.location.href);
+// console.log("Search Param:", window.location.search);
+const queryString = window.location.search;
+console.log(queryString);
+const meetPassword = queryString.split("=");
+console.log(meetPassword[1]);
+
 

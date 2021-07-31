@@ -51,7 +51,7 @@
           </div>
           <div class="main__controls__button" id="participants">
             <i class="fas fa-user-friends"></i>
-            
+
           </div>
           <div onclick="chatShow()" class="main__controls__button">
             <i class="fas fa-comment-alt"></i>
@@ -77,11 +77,46 @@
             <span>Stop Recording</span>
           </div>
           <!-- Recording end -->
+
+
+          <!-- Disconnecting Participant -->
+          <div class="main__controls__button" id="disconnectPeople">
+            <i class="fas fa-users-slash"></i>
+            <span>Disconnect People</span>
+          </div>
+
         </div>
-        <div class="main__controls__block" onclick="location.href='/'">
-          <div class="main__controls__button leave_btn">
+        <div class="main__controls__block">
+          <!-- New code start-->
+
+          <div id="myBtn" class="main__controls__button">
+            <!-- Trigger/Open The Modal -->
+            <i class="fas fa-ellipsis-v"></i>
+            <!-- The Modal -->
+            <div id="myModal" class="modal">
+              <!-- Modal content -->
+              <div class="modal-content">
+                <span class="close"></span>
+                <span class="d-flex justify-content-center" id="addRoomID" style="color: black"></span>
+              </div>
+            </div>
+          </div>
+          <div onclick="clickToPopUp()" class="main__controls__button">
+            <div class="popup">
+              Link Share
+              <span class="popuptext" id="myPopup"><input type="text" id="myInput" />
+                <button id="copy-text" onclick="clickToCopy()">
+                  Copy Link
+                </button>
+              </span>
+            </div>
+          </div>
+          <!-- New code end -->
+          <div class="main__controls__button leave_btn" onclick="location.href='/'">
             <span class="leave_meeting">Leave Meeting</span>
           </div>
+
+
         </div>
       </div>
     </div>
