@@ -22,8 +22,6 @@ app.get("/", (req, res) => {
 app.get("/:room", (req, res) => {
   res.render("room", { roomId: req.params.room });
   console.log("Passcode: ", req.query);
-
-  
 });
 
 
@@ -47,7 +45,7 @@ app.get("/:room", (req, res) => {
 
 // join the room
 io.on("connection", (socket) => {
-  // console.log("New user connected!!");
+  console.log("New user connected!!");
   // console.log(io.sockets.sockets);
 
   // show total participant
@@ -63,11 +61,19 @@ io.on("connection", (socket) => {
       console.log("Message: ", message);
     });
 
+    // New code for user start
+    socket.on("userName", (uname) => {
+      io.to(roomId).emit("userName", uname);
+      console.log("UserName: ", uname);
+    });
+
+    // New code for user end
+
   });
   console.log("object========================================================================");
-  // socket.on("disconnect", function () {
-  //   console.log("user disconnected!");
-  // })
+  socket.on("disconnect", function () {
+    console.log("user disconnected!");
+  })
 
   // socket.on('disconnect', () => {
   //   socket.to(roomId).broadcast.emit('user-disconnected', userId)

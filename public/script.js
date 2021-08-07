@@ -26,8 +26,9 @@ navigator.mediaDevices
   })
   .then((stream) => {
     myVideoStream = stream;
+    console.log("My EhsanRTC video Stream is :", myVideoStream);
     addVideoStream(myVideo, stream);
-
+    
     // another call to join others
     peer.on("call", (call) => {
       call.answer(stream);
@@ -41,7 +42,10 @@ navigator.mediaDevices
       connectToNewUser(userId, stream);
       console.log(userId);
     });
-  });
+  })
+  .catch (error => {
+  console.log("Error Occurred: ", error);
+});
 
 //joining room
 peer.on("open", (id) => {
@@ -71,18 +75,39 @@ const addVideoStream = (video, stream) => {
 
 // Take Message Input from user
 let text = $("#chat_message");
+// var person = prompt("Please enter your name:", "");
 
 $("html").keydown((e) => {
   if (e.which == 13 && text.val().length !== 0) {
     socket.emit("message", text.val());
     text.val("");
   }
+
+
+  console.log(person);
+  socket.emit("userName", person);
 });
 
+// Test code for user start *******************
+
+// var person = prompt("Please enter your name:", "");
+// console.log(person);
+// socket.emit("userID", person);
+
+
+socket.on("userName", (name) => {
+  console.log(name);
+})
+
+// Test code for user end ********************
+
 // Display message from the server (Important)
+// var person = prompt("Please enter your name:", "");
 socket.on("createMessage", (message) => {
   // console.log(message);
-  $(".messages").append(`<li class='message'><b>user</b> <br/>${message}</li>`);
+  // console.log(person);
+  $(".messages").append(`<li class='message'><b>User</b> <br/>${message}</li>`);
+  // $(".messages").append(`<li class='message'><b>${person}</b> <br/>${message}</li>`);
 
   scrollToBottom();
 });
@@ -102,6 +127,8 @@ const scrollToBottom = () => {
 // mute functionality added
 const muteUnmute = () => {
   const enabled = myVideoStream.getAudioTracks()[0].enabled;
+  // const muted = myVideoStream.getAudioTracks(0).muted;
+
   if (enabled) {
     myVideoStream.getAudioTracks()[0].enabled = false;
     setUnmuteButton();
@@ -111,12 +138,16 @@ const muteUnmute = () => {
   }
 };
 
+
+
+
 const setMuteButton = () => {
   const html = `
     <i class="fas fa-microphone"></i>
     <span>Mute</span>
   `;
   document.querySelector(".main__mute_button").innerHTML = html;
+  // document.querySelector(".main__mute_button").prop('muted','true');
 };
 const setUnmuteButton = () => {
   const html = `
@@ -278,7 +309,7 @@ console.log(socket);
 console.log(socket.connected);
 console.log(socket.disconnected);
 console.log(socket?.id);
-console.log("socket ID of Participant",socket.id);
+console.log("socket ID of Participant", socket.id);
 function disconnectParticipant(socket) {
   console.log("I am clicked!");
   // console.log(socket);
@@ -331,7 +362,7 @@ $("#disconnectPeople").click(function () {
   // alert("Hello");
 
   // socket.emit("disconnect", 1);
-  
+
 })
 
 
@@ -390,14 +421,16 @@ window.onclick = function (event) {
 $("#addRoomID").html(
   `Room ID: ${ROOM_ID} </br> Password: ${passwordGenerator} 
   </br>
-  Live Link: http://localhost:3030/${ROOM_ID}?pass=${passwordGenerator}
+  Local Link: http://localhost:3030/${ROOM_ID}?pass=${passwordGenerator}
+  Live Link: https://ehsan-rtc.herokuapp.com/${ROOM_ID}?pass=${passwordGenerator}
+  
   `
 );
 
-// Random Password Function
+// Random Password generation
 function password_generator(len) {
   var length = len ? len : 10;
-  var string = "abcdefghijklmnopqrstuvwxyz"; //to upper
+  var string = "abcdefghijklmnopqrstuvwxyz";
   var numeric = "0123456789";
   var punctuation = "!@$%&*()+~}{[]:;?></";
   var password = "";
@@ -428,9 +461,87 @@ function password_generator(len) {
 
 console.log("Whole Link:", window.location.href);
 // console.log("Search Param:", window.location.search);
+console.log("Location search: ", window.location.search);
 const queryString = window.location.search;
 console.log(queryString);
+if (queryString) {
+  console.log("User Field: I am a User");
+  document.getElementById("disconnectPeople").hidden = true;
+}
+else {
+  console.log("Admin Field: I am an Admin");
+  // document.getElementById("disconnectPeople").hidden = true;
+}
 const meetPassword = queryString.split("=");
 console.log(meetPassword[1]);
+
+// To detect admin or user in the UI
+if(queryString){
+  document.getElementById("admin-field").hidden = true;
+  document.getElementById("user-field").hidden = false;
+}
+else{
+  document.getElementById("admin-field").hidden = false;
+  document.getElementById("user-field").hidden = true;
+}
+
+
+
+// New test code about participant***************************
+
+// window.onload =  function(){
+//   let text = "";
+
+//   // let person = prompt("Please enter your name:", "Harry Potter");
+//   let person = prompt("Please enter your name:", "");
+//   if (person == null || person == "") {
+//     // text = "User cancelled the prompt.";
+//     text = "";
+//   } else {
+//     // text = "Hello " + person + "! How are you today?";
+//     text += person;
+//   }
+//   document.getElementById("demo").innerHTML = text;
+// }
+
+// new 
+// window.onload = function () {
+//   // let participants = [];
+
+//   // let person = prompt("Please enter your name:", "Harry Potter");
+//   let person = prompt("Please enter your name:", "");
+//   if (person == null || person == "") {
+//     // text = "User cancelled the prompt.";
+//     // participants = [];
+//   } else {
+//     // text = "Hello " + person + "! How are you today?";
+//     // text += person;
+//     console.log(person);
+//     function1(person);
+//     // participants.push(person);
+//   }
+//   // console.log("Participant List: ", participants);
+
+//   // document.getElementById("demo").innerHTML = participants;
+
+//   // function1(person);
+// }
+
+
+// function function1(pa) {
+//   var ul = document.getElementById("demo");
+//   var participantList = document.createElement("li");
+//   participantList.appendChild(document.createTextNode(pa));
+//   ul.appendChild(participantList);
+// }
+
+
+
+
+// window.onload = function() {
+//   yourFunction(param1, param2);
+// };
+
+// End test code about participant ******************************
 
 

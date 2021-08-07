@@ -1,0 +1,4 @@
+socket.emit('message', "sending to sender - client only");
+
+socket.broadcast.emit('message', sending to all clients expcept sender);
+
