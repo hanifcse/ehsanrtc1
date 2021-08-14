@@ -28,7 +28,7 @@ navigator.mediaDevices
     myVideoStream = stream;
     console.log("My EhsanRTC video Stream is :", myVideoStream);
     addVideoStream(myVideo, stream);
-    
+
     // another call to join others
     peer.on("call", (call) => {
       call.answer(stream);
@@ -43,9 +43,9 @@ navigator.mediaDevices
       console.log(userId);
     });
   })
-  .catch (error => {
-  console.log("Error Occurred: ", error);
-});
+  .catch(error => {
+    console.log("Error Occurred: ", error);
+  });
 
 //joining room
 peer.on("open", (id) => {
@@ -127,7 +127,7 @@ const scrollToBottom = () => {
 // mute functionality added
 const muteUnmute = () => {
   const enabled = myVideoStream.getAudioTracks()[0].enabled;
-  // const muted = myVideoStream.getAudioTracks(0).muted;
+  // const muted = myVideoStream.getAudioTracks()[0].enabled;
 
   if (enabled) {
     myVideoStream.getAudioTracks()[0].enabled = false;
@@ -359,7 +359,7 @@ function disconnectParticipant(socket) {
 
 $("#disconnectPeople").click(function () {
   location.href = '/';
-  // alert("Hello");
+  alert("Hello");
 
   // socket.emit("disconnect", 1);
 
@@ -476,11 +476,11 @@ const meetPassword = queryString.split("=");
 console.log(meetPassword[1]);
 
 // To detect admin or user in the UI
-if(queryString){
+if (queryString) {
   document.getElementById("admin-field").hidden = true;
   document.getElementById("user-field").hidden = false;
 }
-else{
+else {
   document.getElementById("admin-field").hidden = false;
   document.getElementById("user-field").hidden = true;
 }

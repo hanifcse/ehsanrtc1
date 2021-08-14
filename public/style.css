@@ -308,9 +308,11 @@ video {
     margin-left: 10px;
     margin-bottom: -10px;
 }
-.admin-user:hover .admin-user-field{
+
+.admin-user:hover .admin-user-field {
     color: #FF3F00;
 }
-#admin-field, #user-field{
+
+#admin-field, #user-field {
     font-weight: 700;
 }
