@@ -53,8 +53,11 @@ io.on("connection", (socket) => {
   socket.emit('participant', totalParticipant);
 
   socket.on("join-room", (roomId, userId) => {
+    console.log(userId);
+    console.log(roomId)
     socket.join(roomId);
     socket.broadcast.to(roomId).emit("user-connected", userId);
+    // socket.to(roomId).broadcast.emit("user-connected", userId);
 
     socket.on("message", (message) => {
       io.to(roomId).emit("createMessage", message);
@@ -69,11 +72,24 @@ io.on("connection", (socket) => {
 
     // New code for user end
 
+    // socket.on("disconnect", function (roomId, userId) {
+    //   console.log("user disconnected!");
+    //   console.log(userId);
+    //   socket.broadcast.to(roomId).emit("user-connected", userId);
+    // })
+
+    socket.on('disconnect', () => {
+
+      socket.to(roomId).broadcast.emit('user-disconnected', userId)
+    })
+
   });
   console.log("object========================================================================");
-  socket.on("disconnect", function () {
-    console.log("user disconnected!");
-  })
+  // socket.on("disconnect", function (roomId, userId) {
+  //   console.log("user disconnected!");
+  //   console.log(userId);
+  //   socket.broadcast.to(roomId).emit("user-connected", userId);
+  // })
 
   // socket.on('disconnect', () => {
   //   socket.to(roomId).broadcast.emit('user-disconnected', userId)

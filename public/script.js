@@ -8,6 +8,8 @@ const all_messages = document.getElementById("all_messages");
 const myVideo = document.createElement("video");
 myVideo.muted = true;
 
+const peers = {};
+
 var peer = new Peer(undefined, {
   path: "/peerjs",
   host: "/",
@@ -29,6 +31,15 @@ navigator.mediaDevices
     console.log("My EhsanRTC video Stream is :", myVideoStream);
     addVideoStream(myVideo, stream);
 
+    // new code for disconnecting participant
+    // peer.on('call', call => {
+    //   call.answer(stream)
+    //   const video = document.createElement('video')
+    //   call.on('stream', userVideoStream => {
+    //     addVideoStream(video, userVideoStream)
+    //   })
+    // })
+
     // another call to join others
     peer.on("call", (call) => {
       call.answer(stream);
@@ -42,11 +53,24 @@ navigator.mediaDevices
       connectToNewUser(userId, stream);
       console.log(userId);
     });
+
+    // new code
+
   })
+  // new code
+
+
+
   .catch(error => {
     console.log("Error Occurred: ", error);
   });
 
+socket.on('user-disconnected', userId => {
+  console.log("UID: ", userId);
+  if (peers[userId]) {
+    peers[userId].close()
+  }
+})
 //joining room
 peer.on("open", (id) => {
   console.log("Check", id);
@@ -61,6 +85,10 @@ const connectToNewUser = (userId, stream) => {
   call.on("stream", (userVideoStream) => {
     addVideoStream(video, userVideoStream);
   });
+  call.on('close', () => {
+    video.remove()
+  })
+  peers[userId] = call
 };
 
 // Add video streaming
