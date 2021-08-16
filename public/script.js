@@ -155,6 +155,7 @@ const scrollToBottom = () => {
 // mute functionality added
 const muteUnmute = () => {
   const enabled = myVideoStream.getAudioTracks()[0].enabled;
+
   // const muted = myVideoStream.getAudioTracks()[0].enabled;
 
   if (enabled) {
@@ -387,10 +388,7 @@ function disconnectParticipant(socket) {
 
 $("#disconnectPeople").click(function () {
   location.href = '/';
-  alert("Hello");
-
-  // socket.emit("disconnect", 1);
-
+  // alert("Hello");
 })
 
 
@@ -571,5 +569,35 @@ else {
 // };
 
 // End test code about participant ******************************
+
+// This line of code may be placed inner of testMute() start
+socket.on("mutetest", (msg3) => {
+  console.log(msg3);
+  console.log("UID is : ", msg3.uid);
+})
+// end
+
+// Mute Participant
+
+const testMute = () => {
+  console.log(queryString);
+  if (!queryString) {
+    const enabled = myVideoStream.getAudioTracks()[0].enabled;
+
+    if (enabled) {
+      myVideoStream.getAudioTracks()[0].enabled = false;
+      setUnmuteButton();
+    } else {
+      setMuteButton();
+      myVideoStream.getAudioTracks()[0].enabled = true;
+    }
+
+  }
+  else{
+    console.log("You are not access this functionality!!");
+  }
+
+};
+
 
 

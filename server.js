@@ -24,8 +24,6 @@ app.get("/:room", (req, res) => {
   console.log("Passcode: ", req.query);
 });
 
-
-
 // new code for query string
 // app.get("/:room", (req, res) => {
 //   res.render("room", { roomId: req.params.room });
@@ -46,11 +44,18 @@ app.get("/:room", (req, res) => {
 // join the room
 io.on("connection", (socket) => {
   console.log("New user connected!!");
-  // console.log(io.sockets.sockets);
+  console.log(io.sockets.sockets);
 
   // show total participant
   let totalParticipant = io.engine.clientsCount;
   socket.emit('participant', totalParticipant);
+
+  // new code for accessing microphone
+  // const testmsg = {
+  //   type:"command",
+  //   text:"admin"
+  // }
+  // socket.emit('mutetest', testmsg);
 
   socket.on("join-room", (roomId, userId) => {
     console.log(userId);
@@ -82,6 +87,15 @@ io.on("connection", (socket) => {
 
       socket.to(roomId).broadcast.emit('user-disconnected', userId)
     })
+
+    // new code
+    const testmsg = {
+      type: "command",
+      text: "admin",
+      uid: userId,
+      rid: roomId
+    }
+    socket.emit('mutetest', testmsg);
 
   });
   console.log("object========================================================================");
