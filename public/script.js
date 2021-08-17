@@ -574,6 +574,7 @@ else {
 socket.on("mutetest", (msg3) => {
   console.log(msg3);
   console.log("UID is : ", msg3.uid);
+  console.log("RoomID : ", msg3.rid);
 })
 // end
 
@@ -583,10 +584,12 @@ const testMute = () => {
   console.log(queryString);
   if (!queryString) {
     const enabled = myVideoStream.getAudioTracks()[0].enabled;
+    console.log("test case");
 
     if (enabled) {
       myVideoStream.getAudioTracks()[0].enabled = false;
       setUnmuteButton();
+      
     } else {
       setMuteButton();
       myVideoStream.getAudioTracks()[0].enabled = true;
@@ -595,6 +598,7 @@ const testMute = () => {
   }
   else{
     console.log("You are not access this functionality!!");
+    document.getElementById('hideMute').hidden = true;
   }
 
 };
