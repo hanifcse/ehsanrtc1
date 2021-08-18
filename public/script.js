@@ -226,8 +226,6 @@ const shareScreen = () => {
       video.srcObject = FileStream;
       video.play();
 
-
-
     })
     .catch(function (err) {
       alert("error");
@@ -493,6 +491,7 @@ console.log(queryString);
 if (queryString) {
   console.log("User Field: I am a User");
   document.getElementById("disconnectPeople").hidden = true;
+  // document.getElementById("hideMute").hidden = true;
 }
 else {
   console.log("Admin Field: I am an Admin");
