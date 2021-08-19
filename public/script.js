@@ -54,12 +54,7 @@ navigator.mediaDevices
       console.log(userId);
     });
 
-    // new code
-
   })
-  // new code
-
-
 
   .catch(error => {
     console.log("Error Occurred: ", error);
@@ -155,15 +150,19 @@ const scrollToBottom = () => {
 // mute functionality added
 const muteUnmute = () => {
   const enabled = myVideoStream.getAudioTracks()[0].enabled;
+  console.log(queryString);
 
   // const muted = myVideoStream.getAudioTracks()[0].enabled;
 
-  if (enabled) {
+  if (enabled && !queryString) {
     myVideoStream.getAudioTracks()[0].enabled = false;
     setUnmuteButton();
   } else {
     setMuteButton();
     myVideoStream.getAudioTracks()[0].enabled = true;
+  }
+  if (queryString) {
+    PermissionCameraMic(0);
   }
 };
 
@@ -189,14 +188,22 @@ const setUnmuteButton = () => {
 // Stop video functionality added
 const playStop = () => {
   let enabled = myVideoStream.getVideoTracks()[0].enabled;
-  if (enabled) {
+  if (enabled && !queryString) {
+    console.log("t1", enabled);
+    console.log("t2", !queryString);
     myVideoStream.getVideoTracks()[0].enabled = false;
     setPlayVideo();
   } else {
+    console.log(enabled);
+    console.log(!queryString);
     setStopVideo();
     myVideoStream.getVideoTracks()[0].enabled = true;
   }
+  if (queryString) {
+    PermissionCameraMic(1);
+  }
 };
+
 
 const setStopVideo = () => {
   const html = `
@@ -579,28 +586,54 @@ socket.on("mutetest", (msg3) => {
 
 // Mute Participant
 
-const testMute = () => {
-  console.log(queryString);
-  if (!queryString) {
-    const enabled = myVideoStream.getAudioTracks()[0].enabled;
-    console.log("test case");
+// const testMute = () => {
+//   console.log(queryString);
+//   if (!queryString) {
+//     const enabled = myVideoStream.getAudioTracks()[0].enabled;
+//     console.log("test case");
 
-    if (enabled) {
-      myVideoStream.getAudioTracks()[0].enabled = false;
-      setUnmuteButton();
-      
-    } else {
-      setMuteButton();
-      myVideoStream.getAudioTracks()[0].enabled = true;
-    }
+//     if (enabled) {
+//       myVideoStream.getAudioTracks()[0].enabled = false;
+//       setUnmuteButton();
 
+//     } else {
+//       setMuteButton();
+//       myVideoStream.getAudioTracks()[0].enabled = true;
+//     }
+
+//   }
+//   else{
+//     console.log("You are not access this functionality!!");
+//     document.getElementById('hideMute').hidden = true;
+//   }
+
+// };
+
+const PermissionCameraMic = (check) => {
+  let timerInterval
+  Swal.fire({
+    icon: 'error',
+    
+    title: check? 'Camera Off permission restricted' : 'Microphone mute permission restricted',
+
+
+  // html: 'I will close in <b></b> milliseconds.',
+  timer: 2000,
+    timerProgressBar: true,
+      didOpen: () => {
+        Swal.showLoading()
+        const b = Swal.getHtmlContainer().querySelector('b')
+        timerInterval = setInterval(() => {
+          b.textContent = Swal.getTimerLeft()
+        }, 100)
+      },
+        willClose: () => {
+          clearInterval(timerInterval)
+        }
+}).then((result) => {
+  /* Read more about handling dismissals below */
+  if (result.dismiss === Swal.DismissReason.timer) {
+    console.log('I was closed by the timer')
   }
-  else{
-    console.log("You are not access this functionality!!");
-    document.getElementById('hideMute').hidden = true;
-  }
-
-};
-
-
-
+})
+}
