@@ -733,12 +733,14 @@ leaveMeeting();
 let timerInterval
 Swal.fire({
   title: 'Auto close alert!',
-  html: 'I will close in <strong></strong> seconds.',
-  timer: 10000,
+  html: 'I will close in <strong></strong> Minutes.',
+  timer: 100000,
+  timerProgressBar: true,
+  allowOutsideClick: false,
   didOpen: () => {
     Swal.showLoading()
     timerInterval = setInterval(() => {
-      Swal.getHtmlContainer().querySelector('strong').textContent = Math.ceil(Swal.getTimerLeft() / 1000)
+      Swal.getHtmlContainer().querySelector('strong').textContent = Math.ceil(Swal.getTimerLeft() / 1000 / 60)
     }, 100)
   },
   willClose: () => {
