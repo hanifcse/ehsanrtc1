@@ -16,7 +16,7 @@ var peer = new Peer(undefined, {
   port: "443",
 
   // when we run code in local server we must be port enable and when we deploy it must be disable below port
-  // port: 3030,
+  port: 3030,
 });
 
 let myVideoStream;
@@ -613,27 +613,145 @@ const PermissionCameraMic = (check) => {
   let timerInterval
   Swal.fire({
     icon: 'error',
-    
-    title: check? 'Camera Off permission restricted' : 'Microphone mute permission restricted',
+
+    title: check ? 'Camera Off permission restricted' : 'Microphone mute permission restricted',
 
 
-  // html: 'I will close in <b></b> milliseconds.',
-  timer: 2000,
+    // html: 'I will close in <b></b> milliseconds.',
+    timer: 2000,
     timerProgressBar: true,
-      didOpen: () => {
-        Swal.showLoading()
-        const b = Swal.getHtmlContainer().querySelector('b')
-        timerInterval = setInterval(() => {
-          b.textContent = Swal.getTimerLeft()
-        }, 100)
-      },
-        willClose: () => {
-          clearInterval(timerInterval)
-        }
+    didOpen: () => {
+      Swal.showLoading()
+      const b = Swal.getHtmlContainer().querySelector('b')
+      timerInterval = setInterval(() => {
+        b.textContent = Swal.getTimerLeft()
+      }, 100)
+    },
+    willClose: () => {
+      clearInterval(timerInterval)
+    }
+  }).then((result) => {
+    /* Read more about handling dismissals below */
+    if (result.dismiss === Swal.DismissReason.timer) {
+      console.log('I was closed by the timer')
+    }
+  })
+}
+
+
+const leaveMeeting = () => {
+  setTimeout(() => {
+    // location.href = '/'
+    testCase = true;
+    // alert("Final check")
+
+  }, 20000)
+}
+
+leaveMeeting();
+
+
+
+// Remaining time show(important)
+
+// function getTimeRemaining(endtime) {
+//   const total = Date.parse(endtime) - Date.parse(new Date());
+//   const seconds = Math.floor((total / 1000) % 60);
+//   const minutes = Math.floor((total / 1000 / 60) % 60);
+//   const hours = Math.floor((total / (1000 * 60 * 60)) % 24);
+//   const days = Math.floor(total / (1000 * 60 * 60 * 24));
+
+//   return {
+//     total,
+//     days,
+//     hours,
+//     minutes,
+//     seconds
+//   };
+// }
+
+// function initializeClock(id, endtime) {
+//   const clock = document.getElementById(id);
+//   const daysSpan = clock.querySelector('.days');
+//   const hoursSpan = clock.querySelector('.hours');
+//   const minutesSpan = clock.querySelector('.minutes');
+//   const secondsSpan = clock.querySelector('.seconds');
+
+//   function updateClock() {
+//     const t = getTimeRemaining(endtime);
+
+//     daysSpan.innerHTML = t.days;
+//     hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
+//     minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
+//     secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
+
+//     if (t.total <= 0) {
+//       clearInterval(timeinterval);
+//     }
+//   }
+
+//   updateClock();
+//   const timeinterval = setInterval(updateClock, 1000);
+// }
+
+// const deadline = new Date(Date.parse(new Date()) + 15 * 24 * 60 * 60 * 1000);
+// initializeClock('clockdiv', deadline);
+
+// Remaining time show(important) end
+
+
+
+// sweetalert
+
+// let timerInterval;
+// Swal.fire({
+//   title: 'Auto close alert!',
+//   html: 'I will close in <b></b> milliseconds.',
+//   timer: 10000,
+//   timerProgressBar: true,
+//   allowOutsideClick: false,
+//   didOpen: () => {
+//     Swal.showLoading()
+//     const b = Swal.getHtmlContainer().querySelector('b')
+//     timerInterval = setInterval(() => {
+//       // b.textContent = Swal.getTimerLeft()
+//       b.textContent = Swal.getTimerLeft()
+//     }, 100)
+//   },
+//   willClose: () => {
+//     clearInterval(timerInterval)
+//   }
+// }).then((result) => {
+//   /* Read more about handling dismissals below */
+//   if (result.dismiss === Swal.DismissReason.timer) {
+//     console.log('I was closed by the timer')
+//   }
+// })
+
+
+
+let timerInterval
+Swal.fire({
+  title: 'Auto close alert!',
+  html: 'I will close in <strong></strong> seconds.',
+  timer: 10000,
+  didOpen: () => {
+    Swal.showLoading()
+    timerInterval = setInterval(() => {
+      Swal.getHtmlContainer().querySelector('strong').textContent = Math.ceil(Swal.getTimerLeft() / 1000)
+    }, 100)
+  },
+  willClose: () => {
+    clearInterval(timerInterval)
+  }
 }).then((result) => {
-  /* Read more about handling dismissals below */
-  if (result.dismiss === Swal.DismissReason.timer) {
+  if (
+    // Read more about handling dismissals
+    result.dismiss === Swal.DismissReason.timer
+  ) {
     console.log('I was closed by the timer')
   }
 })
-}
+
+// const b = Swal.getHtmlContainer().querySelector('b')
+
