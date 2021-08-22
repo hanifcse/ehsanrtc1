@@ -9,6 +9,8 @@ const myVideo = document.createElement("video");
 myVideo.muted = true;
 
 const peers = {};
+{/* <link rel="stylesheet" href="/public/style.css" /> */ }
+
 
 var peer = new Peer(undefined, {
   path: "/peerjs",
@@ -641,11 +643,11 @@ const PermissionCameraMic = (check) => {
 
 const leaveMeeting = () => {
   setTimeout(() => {
-    // location.href = '/'
+    location.href = '/'
     testCase = true;
     // alert("Final check")
 
-  }, 20000)
+  }, 60000)
 }
 
 leaveMeeting();
@@ -655,7 +657,9 @@ leaveMeeting();
 // Remaining time show(important)
 
 // function getTimeRemaining(endtime) {
+//   console.log(endtime);
 //   const total = Date.parse(endtime) - Date.parse(new Date());
+//   console.log(total);
 //   const seconds = Math.floor((total / 1000) % 60);
 //   const minutes = Math.floor((total / 1000 / 60) % 60);
 //   const hours = Math.floor((total / (1000 * 60 * 60)) % 24);
@@ -697,6 +701,55 @@ leaveMeeting();
 // const deadline = new Date(Date.parse(new Date()) + 15 * 24 * 60 * 60 * 1000);
 // initializeClock('clockdiv', deadline);
 
+
+// start again********************************
+
+function getTimeRemaining(endtime) {
+  console.log(endtime);
+  const total = Date.parse(endtime) - Date.parse(new Date());
+  console.log(total);
+  const seconds = Math.floor((total / 1000) % 60);
+  const minutes = Math.floor((total / 1000 / 60) % 60);
+  const hours = Math.floor((total / (1000 * 60 * 60)) % 24);
+  const days = Math.floor(total / (1000 * 60 * 60 * 24));
+
+  return {
+    total,
+    days,
+    hours,
+    minutes,
+    seconds
+  };
+}
+
+function initializeClock(id, endtime) {
+  const clock = document.getElementById(id);
+  // const daysSpan = clock.querySelector('.days');
+  const hoursSpan = clock.querySelector('.hours');
+  const minutesSpan = clock.querySelector('.minutes');
+  const secondsSpan = clock.querySelector('.seconds');
+
+  function updateClock() {
+    const t = getTimeRemaining(endtime);
+
+    // daysSpan.innerHTML = t.days;
+    hoursSpan.innerHTML = ('0' + t.hours).slice(-2) + ' h';
+    minutesSpan.innerHTML = ('0' + t.minutes).slice(-2) + ' m';
+    secondsSpan.innerHTML = ('0' + t.seconds).slice(-2) + ' s';
+
+    if (t.total <= 0) {
+      clearInterval(timeinterval);
+      document.getElementById('clockdiv').hidden = true;
+    }
+  }
+
+  updateClock();
+  const timeinterval = setInterval(updateClock, 1000);
+}
+
+const deadline = new Date(Date.parse(new Date()) + 1 * 1 * 1 * 60 * 1000);  // Time given
+initializeClock('clockdiv', deadline);
+
 // Remaining time show(important) end
 
 
@@ -730,30 +783,42 @@ leaveMeeting();
 
 
 
-let timerInterval
-Swal.fire({
-  title: 'Auto close alert!',
-  html: 'I will close in <strong></strong> Minutes.',
-  timer: 100000,
-  timerProgressBar: true,
-  allowOutsideClick: false,
-  didOpen: () => {
-    Swal.showLoading()
-    timerInterval = setInterval(() => {
-      Swal.getHtmlContainer().querySelector('strong').textContent = Math.ceil(Swal.getTimerLeft() / 1000 / 60)
-    }, 100)
-  },
-  willClose: () => {
-    clearInterval(timerInterval)
-  }
-}).then((result) => {
-  if (
-    // Read more about handling dismissals
-    result.dismiss === Swal.DismissReason.timer
-  ) {
-    console.log('I was closed by the timer')
-  }
-})
+// Sweetalert
 
-// const b = Swal.getHtmlContainer().querySelector('b')
+// let timerInterval
+// Swal.fire({
+//   // title: 'Auto close alert!',
+//   html: 'Meeting remain <strong></strong> Minutes.',
+//   timer: 100000,
+//   timerProgressBar: true,
+//   // allowOutsideClick: false,
+//   // allowEscapeKey: true,
+//   stopKeydownPropagation: false,
+//   toast: true,
+//   position: 'top-start',
+//   showConfirmButton: false,
+//   width: 350,
+//   heightAuto: false,
+//   customClass: 'swal-height',
+
+
+//   // input: 'text',
+//   didOpen: () => {
+//     Swal.showLoading()
+//     timerInterval = setInterval(() => {
+//       Swal.getHtmlContainer().querySelector('strong').textContent = Math.ceil(Swal.getTimerLeft() / 1000 / 60)
+//     }, 100)
+//   },
+//   willClose: () => {
+//     clearInterval(timerInterval)
+//   }
+// }).then((result) => {
+//   if (
+//     // Read more about handling dismissals
+//     result.dismiss === Swal.DismissReason.timer
+//   ) {
+//     console.log('I was closed by the timer')
+//   }
+// })
+
 
