@@ -33,6 +33,7 @@ navigator.mediaDevices
     console.log("My EhsanRTC video Stream is :", myVideoStream);
     addVideoStream(myVideo, stream);
 
+
     // new code for disconnecting participant
     // peer.on('call', call => {
     //   call.answer(stream)
@@ -640,17 +641,73 @@ const PermissionCameraMic = (check) => {
   })
 }
 
-
-const leaveMeeting = () => {
-  setTimeout(() => {
-    location.href = '/'
-    testCase = true;
-    // alert("Final check")
-
-  }, 60000)
+// leave meeting
+const leaveMeeting = () =>{
+  location.href = '/';
 }
 
-leaveMeeting();
+const leaveMeeting1 = () => {
+  setTimeout(() => {
+    // important **************
+    // location.href = '/'
+    // alert("Final check")
+
+    // new code
+    socket.emit('dis', '1')
+    socket.on('user-dis', userId => {
+      // alert("test dis")
+      console.log("UID: ", userId);
+      if (peers[userId]) {
+        peers[userId].close()
+      }
+    })
+
+  }, 20000)
+}
+
+leaveMeeting1();
+
+// const tc = 0;
+
+// if(tc == 5){
+//   leaveMeeting();
+// }
+
+// $(function() {
+//   var e = $.Event('keypress');
+//   e.which = 65; // Character 'A'
+//   $('item').trigger(e);
+//   console.log(e);
+// });
+
+// const log = document.getElementById('log');
+
+// document.addEventListener('keypress', logKey);
+
+// function logKey(e) {
+//   log.textContent += ` ${e.code}`;
+// }
+
+// function myKeyPress(e){
+//   var keynum;
+
+//   if(window.event) { // IE                  
+//     keynum = e.keyCode;
+//   } else if(e.which){ // Netscape/Firefox/Opera                 
+//     keynum = e.which;
+//   }
+
+//   console.log(String.fromCharCode(keynum));
+//   if(String.fromCharCode(keynum) === 'w'){
+//     leaveMeeting();
+//   }
+// }
+
+// $("input").keypress(function(event){
+//   alert(String.fromCharCode(event.which)); 
+// });
+// leaveMeeting();
+
 
 
 
@@ -747,8 +804,27 @@ function initializeClock(id, endtime) {
   const timeinterval = setInterval(updateClock, 1000);
 }
 
-const deadline = new Date(Date.parse(new Date()) + 1 * 1 * 1 * 60 * 1000);  // Time given
+const deadline = new Date(Date.parse(new Date()) + 1 * 1 * 1 * 20 * 1000);  // Time given
 initializeClock('clockdiv', deadline);
+
+// new code
+// function myKeyPress(e){
+//   var keynum;
+
+//   if(window.event) { // IE                  
+//     keynum = e.keyCode;
+//   } else if(e.which){ // Netscape/Firefox/Opera                 
+//     keynum = e.which;
+//   }
+
+//   console.log(String.fromCharCode(keynum));
+//   if(String.fromCharCode(keynum) === 'w'){
+//     // const deadline = new Date(Date.parse(new Date()) + 1 * 1 * 1 * 20 * 1000); 
+//     leaveMeeting();
+//     initializeClock('clockdiv', deadline);
+//   }
+// }
+// initializeClock('clockdiv', deadline);
 
 // Remaining time show(important) end
 

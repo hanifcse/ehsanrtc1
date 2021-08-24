@@ -44,7 +44,7 @@ app.get("/:room", (req, res) => {
 // join the room
 io.on("connection", (socket) => {
   console.log("New user connected!!");
-  console.log(io.sockets.sockets);
+  // console.log(io.sockets.sockets);
 
   // show total participant
   let totalParticipant = io.engine.clientsCount;
@@ -87,6 +87,13 @@ io.on("connection", (socket) => {
     socket.on('disconnect', () => {
 
       socket.to(roomId).broadcast.emit('user-disconnected', userId)
+    })
+
+    // new code
+    socket.on('dis', (res) => {
+      console.log("Result test : ", res);
+      console.log("UserID : ", userId);
+      socket.to(roomId).broadcast.emit('user-dis', userId)
     })
 
     // new code
