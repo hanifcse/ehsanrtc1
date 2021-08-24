@@ -18,7 +18,7 @@ var peer = new Peer(undefined, {
   port: "443",
 
   // when we run code in local server we must be port enable and when we deploy it must be disable below port
-  // port: 3030,
+  port: 3030,
 });
 
 let myVideoStream;
@@ -642,7 +642,7 @@ const PermissionCameraMic = (check) => {
 }
 
 // leave meeting
-const leaveMeeting = () =>{
+const leaveMeeting = () => {
   location.href = '/';
 }
 
@@ -797,6 +797,7 @@ function initializeClock(id, endtime) {
     if (t.total <= 0) {
       clearInterval(timeinterval);
       document.getElementById('clockdiv').hidden = true;
+      document.getElementById('timeCount').hidden = true;
     }
   }
 
@@ -806,6 +807,33 @@ function initializeClock(id, endtime) {
 
 const deadline = new Date(Date.parse(new Date()) + 1 * 1 * 1 * 20 * 1000);  // Time given
 initializeClock('clockdiv', deadline);
+
+
+// Total time count
+var minutesLabel = document.getElementById("minutes");
+var secondsLabel = document.getElementById("seconds");
+var hoursLabel = document.getElementById("hours");
+var totalSeconds = 0;
+setInterval(setTime, 1000);
+
+function setTime() {
+  ++totalSeconds;
+  secondsLabel.innerHTML = pad(totalSeconds % 60) + ' s';
+  minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60)) + ' m';
+  hoursLabel.innerHTML = pad(parseInt(totalSeconds / 60 / 60)) + ' h';
+}
+
+function pad(val) {
+  var valString = val + "";
+  if (valString.length < 2) {
+    return "0" + valString;
+  } else {
+    return valString;
+  }
+}
+
+
+
 
 // new code
 // function myKeyPress(e){

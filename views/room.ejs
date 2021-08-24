@@ -36,6 +36,7 @@
 
 <body>
   <div class="main">
+    <!-- <label id="hours">00 h</label> :<label id="minutes">00 m</label>:<label id="seconds">00 s</label> -->
     <!-- New code for detected participant is admin or user -->
     <div class="admin-user">
       <i class="fas fa-record-vinyl mt-1 text-danger"></i>
@@ -44,14 +45,12 @@
         <h5 id="user-field">User</h5>
       </div>
     </div>
-
-    
     <!-- Code end -->
 
     <!-- Remaining time count -->
     <!-- <h6>Remaining Time</h6> -->
     <div id="clockdiv">
-      <h4>Remaining Time</h4>
+      <h6>Remaining Time</h6>
       <!-- <div>
         <span class="days"></span>
         <div class="smalltext">Days</div>
@@ -69,7 +68,23 @@
         <!-- <div class="smalltext">Seconds</div> -->
       </div>
     </div>
-    <!-- End -->
+    <!-- Remaining Time End -->
+
+    <!-- Time count start -->
+    <div id="timeCount">
+      <h6>Meeting Ongoing</h6>
+      <div>
+        <span id="hours"></span>
+      </div>
+      <div>
+        <span id="minutes"></span>
+      </div>
+      <div>
+        <span id="seconds"></span>
+      </div>
+    </div>
+    <!-- Time count end -->
+
     <div class="main__left">
       <div class="main__videos">
         <div id="video-grid"></div>

@@ -339,27 +339,51 @@ h1 {
     display: inline-block;
     font-weight: 700;
     text-align: center;
-    font-size: 20px;
+    font-size: 14px;
     position: absolute;
     margin: 10px;
 }
 
 #clockdiv>div {
-    padding: 5px;
-    border-radius: 3px;
-    background: #03256C;
+    padding: 10px;
+    border-radius: 7px;
+    /* background: #03256C; */
+    background: #af1010;
     display: inline-block;
 }
 
 #clockdiv div>span {
     padding: 5px;
     border-radius: 3px;
-    background: #03256C;
+    background: #f30d05;
     /* background-color: #2541B2; */
     display: inline-block;
 }
 
-/* .smalltext {
-    padding-top: 5px;
-    font-size: 16px;
-} */
+#timeCount{
+    font-family: sans-serif;
+    color: #fff;
+    display: inline-block;
+    font-weight: 700;
+    text-align: center;
+    font-size: 14px;
+    position: absolute;
+    margin: 10px;
+    /* top: 50px; */
+    left: 50%;
+    transform: translateX(-50%);
+}
+#timeCount>div{
+    padding: 10px;
+    border-radius: 7px;
+    /* background: #03256C; */
+    background: #073bac;
+    display: inline-block;
+}
+#timeCount div>span{
+    padding: 5px;
+    border-radius: 3px;
+    /* background: #03256C; */
+    background-color: #3f5fdf;
+    display: inline-block;
+}
