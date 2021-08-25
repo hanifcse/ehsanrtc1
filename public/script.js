@@ -391,9 +391,6 @@ function disconnectParticipant(socket) {
 
 
 
-// New code 26.07.2021
-
-
 $("#disconnectPeople").click(function () {
   location.href = '/';
   // alert("Hello");
@@ -759,7 +756,7 @@ leaveMeeting1();
 // initializeClock('clockdiv', deadline);
 
 
-// start again********************************
+// Remaining time final code start
 
 function getTimeRemaining(endtime) {
   console.log(endtime);
@@ -805,11 +802,14 @@ function initializeClock(id, endtime) {
   const timeinterval = setInterval(updateClock, 1000);
 }
 
-const deadline = new Date(Date.parse(new Date()) + 1 * 1 * 1 * 20 * 1000);  // Time given
+ // Time given day, hour, minute, second * 1000(to convert total millisecond to second)
+const deadline = new Date(Date.parse(new Date()) + 1 * 1 * 1 * 20 * 1000); 
 initializeClock('clockdiv', deadline);
 
+// Remaining time end
 
-// Total time count
+
+// Total time count start
 var minutesLabel = document.getElementById("minutes");
 var secondsLabel = document.getElementById("seconds");
 var hoursLabel = document.getElementById("hours");
@@ -831,6 +831,7 @@ function pad(val) {
     return valString;
   }
 }
+// Total time count end
 
 
 

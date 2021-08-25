@@ -24,6 +24,7 @@ app.get("/:room", (req, res) => {
   console.log("Passcode: ", req.query);
 });
 
+
 // new code for query string
 // app.get("/:room", (req, res) => {
 //   res.render("room", { roomId: req.params.room });
@@ -85,8 +86,8 @@ io.on("connection", (socket) => {
 
 
     socket.on('disconnect', () => {
-
-      socket.to(roomId).broadcast.emit('user-disconnected', userId)
+      socket.to(roomId).broadcast.emit('user-disconnected', userId);
+      console.log("User Disconnected v.1");
     })
 
     // new code
@@ -94,6 +95,7 @@ io.on("connection", (socket) => {
       console.log("Result test : ", res);
       console.log("UserID : ", userId);
       socket.to(roomId).broadcast.emit('user-dis', userId)
+      console.log("User Disconnected v.2");
     })
 
     // new code
