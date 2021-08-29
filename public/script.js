@@ -18,7 +18,7 @@ var peer = new Peer(undefined, {
   port: "443",
 
   // when we run code in local server we must be port enable and when we deploy it must be disable below port
-  // port: 3030,
+  port: 3030,
 });
 
 let myVideoStream;
@@ -412,7 +412,7 @@ function clickToPopUp() {
   popup.classList.toggle("show");
   document.getElementById(
     "myInput"
-  ).value = `http://localhost:3030/${ROOM_ID}?pass=${passwordGenerator}`; //set value on myInputID
+  ).value = `http://localhost:3030/${ROOM_ID}?time=${queryTime}?pass=${passwordGenerator}`; //set value on myInputID
 }
 // click to copy Function
 function clickToCopy() {
@@ -495,7 +495,19 @@ console.log("Whole Link:", window.location.href);
 console.log("Location search: ", window.location.search);
 const queryString = window.location.search;
 console.log(queryString);
-if (queryString) {
+const linkLength = queryString.split("?").length;
+console.log(linkLength);  // if admin length is 2 and if user length is more than 2
+// http://localhost:3030/6JE2E414OD?time=5
+// http://localhost:3030/6JE2E414OD?time=5?pass=d1%$q]Z@75C8
+
+const splitQuery = queryString.split("?");
+const splitQueryAgain = splitQuery[1].split("=");
+const queryTime = splitQueryAgain[1];
+console.log(queryTime);
+// orginal time
+const totalTime = queryTime * 60 * 1000;
+console.log(totalTime);
+if (queryString && linkLength > 2) {
   console.log("User Field: I am a User");
   document.getElementById("disconnectPeople").hidden = true;
   // document.getElementById("hideMute").hidden = true;
@@ -504,11 +516,14 @@ else {
   console.log("Admin Field: I am an Admin");
   // document.getElementById("disconnectPeople").hidden = true;
 }
+
+// problem********************************************
 const meetPassword = queryString.split("=");
 console.log(meetPassword[1]);
+// ***********************************************************
 
 // To detect admin or user in the UI
-if (queryString) {
+if (queryString && linkLength > 2) {
   document.getElementById("admin-field").hidden = true;
   document.getElementById("user-field").hidden = false;
 }
@@ -659,7 +674,7 @@ const leaveMeeting1 = () => {
       }
     })
 
-  }, 20000)
+  }, totalTime)
 }
 
 leaveMeeting1();
@@ -802,8 +817,9 @@ function initializeClock(id, endtime) {
   const timeinterval = setInterval(updateClock, 1000);
 }
 
- // Time given day, hour, minute, second * 1000(to convert total millisecond to second)
-const deadline = new Date(Date.parse(new Date()) + 1 * 1 * 1 * 20 * 1000); 
+// Time given day, hour, minute, second * 1000(to convert total millisecond to second)
+// const deadline = new Date(Date.parse(new Date()) + 1 * 1 * 60 * 60 * 1000);
+const deadline = new Date(Date.parse(new Date()) + totalTime);
 initializeClock('clockdiv', deadline);
 
 // Remaining time end
@@ -815,6 +831,7 @@ var secondsLabel = document.getElementById("seconds");
 var hoursLabel = document.getElementById("hours");
 var totalSeconds = 0;
 setInterval(setTime, 1000);
+
 
 function setTime() {
   ++totalSeconds;

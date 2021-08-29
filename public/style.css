@@ -17,6 +17,8 @@
     display: none;
     background-color: #1768AC;
     border-left: 1px solid #03256C;
+    /* height: 637px; */
+    /* height: 39.813rem; */
 }
 
 .main__videos {
@@ -103,7 +105,7 @@ video {
 .main__chat_window {
     flex-grow: 1;
     overflow-y: auto;
-    padding-top: 10px;
+    padding-top: 50px;
 }
 
 .messages {
@@ -281,7 +283,7 @@ video {
 
 /* Modal Content */
 
-.modal-content {
+.modal-content1 {
     background-color: #fefefe;
     margin: auto;
     padding: 20px;
@@ -319,19 +321,19 @@ video {
 
 /* Remaining time */
 
-body {
-    text-align: center;
+#room-body {
+    /* text-align: center; */
     background: #00ECB9;
     font-family: sans-serif;
     font-weight: 100;
 }
 
-h1 {
+/* h1 {
     color: #396;
     font-weight: 100;
     font-size: 40px;
     margin: 40px 0px 20px;
-}
+} */
 
 #clockdiv {
     font-family: sans-serif;
@@ -386,4 +388,47 @@ h1 {
     /* background: #03256C; */
     background-color: #3f5fdf;
     display: inline-block;
+}
+
+
+/* index.html page */
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+.navbar-nav {
+    font-size: 12px;
+}
+
+.material-icons.md-30 {
+    font-size: 30px;
+}
+
+/* Carousel section */
+
+#carousel-container {
+    padding: 50px 0;
+}
+
+.carousel-item img {
+    height: 600px;
+}
+
+/* Main section */
+
+textarea:focus, input:focus {
+    outline: none;
+}
+
+.join-btn {
+    margin-left: 10px;
+    padding: 0 30px;
+    font-weight: 700;
+    font-size: larger;
+}
+
+/* for modal show and writable */
+.modal-backdrop{
+    z-index: 0;
 }
