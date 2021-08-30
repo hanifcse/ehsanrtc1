@@ -11,7 +11,7 @@ myVideo.muted = true;
 const peers = {};
 {/* <link rel="stylesheet" href="/public/style.css" /> */ }
 
-
+// new peer
 var peer = new Peer(undefined, {
   path: "/peerjs",
   host: "/",
