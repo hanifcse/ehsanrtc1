@@ -39,7 +39,8 @@
 
                         <div class="navbar-nav ms-auto">
                             <a class="nav-link join-meeting" href="#main-section">JOIN THE MEETING</a>
-                            <a class="nav-link new-meeting" href="#">START A MEETING</a>
+                            <a class="nav-link new-meeting" href="#" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">START A MEETING</a>
                             <a class="nav-link" href="#">SIGN IN</a>
                             <button class="btn btn-primary">SIGN UP, IT'S FREE</button>
                         </div>
@@ -100,11 +101,14 @@
                                 <div class="modal-body">
                                     <form>
                                         <div class="mb-3">
-                                            <label for="recipient-name" class="col-form-label">Duration of Meeting</label>
-                                            <input type="text" class="form-control" id="recipient-name" placeholder="Time Duration">
+                                            <label for="recipient-name" class="col-form-label">Duration of
+                                                Meeting</label>
+                                            <input type="text" class="form-control" id="recipient-name"
+                                                placeholder="Time Duration">
                                         </div>
                                         <div class="mb-3">
-                                            <label for="message-text" class="col-form-label">Name of the Participant</label>
+                                            <label for="message-text" class="col-form-label">Name of the
+                                                Participant</label>
                                             <!-- <textarea class="form-control" id="message-text"></textarea> -->
                                             <input type="text" class="form-control" id="message-text"></input>
                                         </div>
@@ -114,7 +118,7 @@
                                     <button type="button" class="btn btn-secondary"
                                         data-bs-dismiss="modal">Close</button>
                                     <button type="button" class="btn btn-primary" id="send-info"
-                                        onclick="sendInfo()">Send message</button>
+                                        onclick="sendInfo()">Meeting Call</button>
                                 </div>
                             </div>
                         </div>

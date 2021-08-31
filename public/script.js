@@ -53,8 +53,11 @@ navigator.mediaDevices
     });
 
     socket.on("user-connected", (userId) => {
-      connectToNewUser(userId, stream);
-      console.log(userId);
+      setTimeout(() => {
+        connectToNewUser(userId, stream);
+        console.log(userId);
+      }, 1000);
+
     });
 
   })
@@ -154,17 +157,19 @@ const scrollToBottom = () => {
 const muteUnmute = () => {
   const enabled = myVideoStream.getAudioTracks()[0].enabled;
   console.log(queryString);
+  console.log(linkLength);
 
   // const muted = myVideoStream.getAudioTracks()[0].enabled;
 
-  if (enabled && !queryString) {
+  // In case of admin linkLength is 2 and in case of user linkLength is more than 2 (3 in case)
+  if (enabled && linkLength == 2) {
     myVideoStream.getAudioTracks()[0].enabled = false;
     setUnmuteButton();
   } else {
     setMuteButton();
     myVideoStream.getAudioTracks()[0].enabled = true;
   }
-  if (queryString) {
+  if (linkLength > 2) {
     PermissionCameraMic(0);
   }
 };
@@ -189,9 +194,11 @@ const setUnmuteButton = () => {
 };
 
 // Stop video functionality added
+
+// In case of admin linkLength is 2 and in case of user linkLength is more than 2 (3 in case)
 const playStop = () => {
   let enabled = myVideoStream.getVideoTracks()[0].enabled;
-  if (enabled && !queryString) {
+  if (enabled && linkLength == 2) {
     console.log("t1", enabled);
     console.log("t2", !queryString);
     myVideoStream.getVideoTracks()[0].enabled = false;
@@ -202,7 +209,7 @@ const playStop = () => {
     setStopVideo();
     myVideoStream.getVideoTracks()[0].enabled = true;
   }
-  if (queryString) {
+  if (linkLength > 2) {
     PermissionCameraMic(1);
   }
 };
