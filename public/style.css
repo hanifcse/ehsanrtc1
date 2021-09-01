@@ -362,7 +362,7 @@ video {
     display: inline-block;
 }
 
-#timeCount{
+#timeCount {
     font-family: sans-serif;
     color: #fff;
     display: inline-block;
@@ -375,21 +375,22 @@ video {
     left: 50%;
     transform: translateX(-50%);
 }
-#timeCount>div{
+
+#timeCount>div {
     padding: 10px;
     border-radius: 7px;
     /* background: #03256C; */
     background: #073bac;
     display: inline-block;
 }
-#timeCount div>span{
+
+#timeCount div>span {
     padding: 5px;
     border-radius: 3px;
     /* background: #03256C; */
     background-color: #3f5fdf;
     display: inline-block;
 }
-
 
 /* index.html page */
 
@@ -429,6 +430,41 @@ textarea:focus, input:focus {
 }
 
 /* for modal show and writable */
-.modal-backdrop{
+
+.modal-backdrop {
     z-index: 0;
+}
+
+#exampleModal {
+    /* width: 1500px; */
+}
+
+@media (min-width: 576px) {
+    .modal-dialog {
+        max-width: 750px;
+    }
+}
+
+/* Date Picker */
+.date-picker{
+    max-width: 250px;
+    cursor: pointer;
+}
+.input-group-text {
+    padding: 1rem 1.70rem;
+}
+.datepicker{
+    padding: 20px 30px;
+    top: 160px !important;
+
+}
+.dropdown{
+    margin: 28px;
+}
+.dropdown-menu {
+    max-height: 280px;
+    overflow-y: auto;
+}
+.month{
+    margin: 5px;
 }
