@@ -468,3 +468,12 @@ textarea:focus, input:focus {
 .month{
     margin: 5px;
 }
+
+.time-select{
+    padding-top: 0.85rem;
+    padding-bottom: 0.85rem;
+    padding-left: .5rem;
+    font-size: .875rem;
+    margin-top: 22px;
+    margin-left: 50px;
+}

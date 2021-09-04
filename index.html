@@ -132,9 +132,9 @@
                                 <div class="modal-body">
                                     <form>
                                         <div class="mb-3">
-                                            <label for="recipient-name" class="col-form-label">Duration of
+                                            <label for="time-duration" class="col-form-label">Duration of
                                                 Meeting</label>
-                                            <input type="text" class="form-control" id="recipient-name"
+                                            <input type="text" class="form-control" id="time-duration"
                                                 placeholder="Time Duration">
                                         </div>
                                         <div class="mb-3">
@@ -145,7 +145,7 @@
                                         </div>
                                         <!-- <p>Date: <input type="text" id="datepicker"></p> -->
                                         <!-- start -->
-                                        <div class="d-flex">
+                                        <div class="d-flex align-items-center">
                                             <div class="date-picker">
                                                 <div class="form-group m-1">
                                                     <label class="font-weight-bold" for="dob">
@@ -171,8 +171,7 @@
                                             </div>
                                             <!-- end -->
 
-                                            <div class="dropdown dropend">
-                                                <!-- <label class="col-form-label">Time</label> -->
+                                            <!-- <div class="dropdown dropend">
                                                 <button class="btn btn-secondary dropdown-toggle btn-lg" type="button"
                                                     id="dropdownMenuButton1" data-bs-toggle="dropdown"
                                                     aria-expanded="false">
@@ -272,8 +271,113 @@
                                                     <li><a class="dropdown-item" href="#">11:30 PM</a></li>
                                                     <li><a class="dropdown-item" href="#">11:45 PM</a></li>
                                                 </ul>
+                                            </div> -->
+
+                                            <div class="">
+                                                <select class="form-select form-select-sm time-select"
+                                                    aria-label=".form-select-sm example">
+                                                    <option selected>Time</option>
+                                                    <option value="1">00:00 AM</option>
+                                                    <option value="2">00:15 AM</option>
+                                                    <option value="3">00:30 AM</option>
+                                                    <option value="4">00:45 AM</option>
+                                                    <option value="1">01:00 AM</option>
+                                                    <option value="2">01:15 AM</option>
+                                                    <option value="3">01:30 AM</option>
+                                                    <option value="4">01:45 AM</option>
+                                                    <option value="1">02:00 AM</option>
+                                                    <option value="2">02:15 AM</option>
+                                                    <option value="3">02:30 AM</option>
+                                                    <option value="4">02:45 AM</option>
+                                                    <option value="1">03:00 AM</option>
+                                                    <option value="2">03:15 AM</option>
+                                                    <option value="3">03:30 AM</option>
+                                                    <option value="4">03:45 AM</option>
+                                                    <option value="1">04:00 AM</option>
+                                                    <option value="2">04:15 AM</option>
+                                                    <option value="3">04:30 AM</option>
+                                                    <option value="4">04:45 AM</option>
+                                                    <option value="1">05:00 AM</option>
+                                                    <option value="2">05:15 AM</option>
+                                                    <option value="3">05:30 AM</option>
+                                                    <option value="4">05:45 AM</option>
+                                                    <option value="1">06:00 AM</option>
+                                                    <option value="2">06:15 AM</option>
+                                                    <option value="3">06:30 AM</option>
+                                                    <option value="4">06:45 AM</option>
+                                                    <option value="1">07:00 AM</option>
+                                                    <option value="2">07:15 AM</option>
+                                                    <option value="3">07:30 AM</option>
+                                                    <option value="4">07:45 AM</option>
+                                                    <option value="1">08:00 AM</option>
+                                                    <option value="2">08:15 AM</option>
+                                                    <option value="3">08:30 AM</option>
+                                                    <option value="4">08:45 AM</option>
+                                                    <option value="1">09:00 AM</option>
+                                                    <option value="2">09:15 AM</option>
+                                                    <option value="3">09:30 AM</option>
+                                                    <option value="4">09:45 AM</option>
+                                                    <option value="1">10:00 AM</option>
+                                                    <option value="2">10:15 AM</option>
+                                                    <option value="3">10:30 AM</option>
+                                                    <option value="4">10:45 AM</option>
+                                                    <option value="1">11:00 AM</option>
+                                                    <option value="2">11:15 AM</option>
+                                                    <option value="3">11:30 AM</option>
+                                                    <option value="4">11:45 AM</option>
+                                                    <option value="1">12:00 PM</option>
+                                                    <option value="2">12:15 PM</option>
+                                                    <option value="3">12:30 PM</option>
+                                                    <option value="4">12:45 PM</option>
+                                                    <option value="1">01:00 PM</option>
+                                                    <option value="2">01:15 PM</option>
+                                                    <option value="3">01:30 PM</option>
+                                                    <option value="4">01:45 PM</option>
+                                                    <option value="1">02:00 PM</option>
+                                                    <option value="2">02:15 PM</option>
+                                                    <option value="3">02:30 PM</option>
+                                                    <option value="4">02:45 PM</option>
+                                                    <option value="1">03:00 PM</option>
+                                                    <option value="2">03:15 PM</option>
+                                                    <option value="3">03:30 PM</option>
+                                                    <option value="4">03:45 PM</option>
+                                                    <option value="1">04:00 PM</option>
+                                                    <option value="2">04:15 PM</option>
+                                                    <option value="3">04:30 PM</option>
+                                                    <option value="4">04:45 PM</option>
+                                                    <option value="1">05:00 PM</option>
+                                                    <option value="2">05:15 PM</option>
+                                                    <option value="3">05:30 PM</option>
+                                                    <option value="4">05:45 PM</option>
+                                                    <option value="1">06:00 PM</option>
+                                                    <option value="2">06:15 PM</option>
+                                                    <option value="3">06:30 PM</option>
+                                                    <option value="4">06:45 PM</option>
+                                                    <option value="1">07:00 PM</option>
+                                                    <option value="2">07:15 PM</option>
+                                                    <option value="3">07:30 PM</option>
+                                                    <option value="4">07:45 PM</option>
+                                                    <option value="1">08:00 PM</option>
+                                                    <option value="2">08:15 PM</option>
+                                                    <option value="3">08:30 PM</option>
+                                                    <option value="4">08:45 PM</option>
+                                                    <option value="1">09:00 PM</option>
+                                                    <option value="2">09:15 PM</option>
+                                                    <option value="3">09:30 PM</option>
+                                                    <option value="4">09:45 PM</option>
+                                                    <option value="1">10:00 PM</option>
+                                                    <option value="2">10:15 PM</option>
+                                                    <option value="3">10:30 PM</option>
+                                                    <option value="4">10:45 PM</option>
+                                                    <option value="1">11:00 PM</option>
+                                                    <option value="2">11:15 PM</option>
+                                                    <option value="3">11:30 PM</option>
+                                                    <option value="4">11:45 PM</option>
+                                                </select>
                                             </div>
+
                                         </div>
+
 
                                     </form>
                                 </div>
@@ -421,15 +525,20 @@
         const sendInfo = () => {
             const meeting_ID = password_generator();
             console.log(meeting_ID);
-            const recName = document.getElementById('recipient-name').value;
-            console.log(recName);
+            const timeDuration = document.getElementById('time-duration').value;
+            console.log(timeDuration);
 
             const t = document.getElementById('message-text').value;
             console.log(t);
 
+            if (timeDuration >= 1) {
+                var meetingURL = `http://localhost:3030/${meeting_ID}?time=${timeDuration}`;
+                window.location.replace(meetingURL);
+            }
+            else {
+                alert("Please input meeting duration");
+            }
 
-            var meetingURL = `http://localhost:3030/${meeting_ID}?time=${recName}`;
-            window.location.replace(meetingURL);
         }
 
         // password generator
