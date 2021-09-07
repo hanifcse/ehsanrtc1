@@ -49,6 +49,8 @@
     <style type="text/css">
         .ui-datepicker-trigger {
             max-height: 28px;
+            border-radius: 5px;
+            margin-left: 10px;
         }
     </style>
 
@@ -143,17 +145,6 @@
         <div id="main-section" class="py-5 px-5">
             <div class="container-fluid">
                 <div class="row">
-                    <!-- new code for modal -->
-
-
-                    <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                        data-bs-whatever="@mdo">Open modal for @mdo</button>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                        data-bs-whatever="@fat">Open modal for @fat</button> -->
-
-                    <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                        data-bs-whatever="@getbootstrap">Open modal for @getbootstrap</button> -->
-
                     <div class="modal fade bg-primary" id="exampleModal" tabindex="-1"
                         aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
@@ -175,26 +166,15 @@
                                             <label for="message-text" class="col-form-label">Name of the
                                                 Participant</label>
                                             <!-- <textarea class="form-control" id="message-text"></textarea> -->
-                                            <input type="text" class="form-control" id="message-text"></input>
+                                            <input type="text" class="form-control" id="message-text">
                                         </div>
 
-                                        <!-- <p>Date: <input type="text" id="datepicker"></p> -->
-                                        <!-- Date and time features added -->
+                                        <label for="date">Date</label>
                                         <div class="d-flex align-items-center">
 
-
-                                            <!-- test code start -->
-                                            <!-- <label for="from">From</label> <input type="text" id="from" name="from" />
-                                            <label for="to">to</label> <input type="text" id="to" name="to" /> -->
-                                            <!-- end -->
-
-                                            <!-- test now start -->
-
-                                            Date :
-                                            <input id="txtdate" type="text" class="form-control">
-                                            <!-- <img class="" src="./public/Assets/Images/calendarbtn.jpg" alt="image"> -->
-
-                                            <!-- end -->
+                                            <div class="d-flex">
+                                                <input id="txtdate" type="text" class="form-control">
+                                            </div>
 
                                             <div class="">
                                                 <select class="form-select form-select-sm time-select"

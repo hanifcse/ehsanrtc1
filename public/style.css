@@ -474,7 +474,7 @@ textarea:focus, input:focus {
     padding-bottom: 0.85rem;
     padding-left: .5rem;
     font-size: .875rem;
-    margin-top: 32px;
+    /* margin-top: 32px; */
     margin-left: 50px;
 }
 .time-zone{
