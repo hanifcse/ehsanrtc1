@@ -18,7 +18,7 @@ var peer = new Peer(undefined, {
   port: "443",
 
   // when we run code in local server we must be port enable and when we deploy it must be disable below port
-  port: 3030,
+  // port: 3030,
 });
 
 let myVideoStream;
@@ -909,7 +909,6 @@ function pad(val) {
 //     console.log('I was closed by the timer')
 //   }
 // })
-
 
 
 // Sweetalert

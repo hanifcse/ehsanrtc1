@@ -1,0 +1,35 @@
+Project Name: EhsanRTC (web Real-time Communication)
+
+Instruction: 
+
+(1) At first, Open the terminal, then run 'npm start' command (if error show in terminal then 'sudo pkill node' command run in the terminal)
+
+(2) Open index.html a live server (right click to index.html file then option select open with live server)
+
+(3) Then EhsanRTC Home page show
+
+(4) Click the start a meeting
+
+(5) Then give data in that data field, (e.g., give time duration of meeting)
+
+(6) Click meeting call
+
+(7) Then meeting will be started
+
+(8) Now click link share and then copy link
+
+(9) Paste that link in new tab. Then automatically join new participant in the meeting.
+
+(10) And rest features added in GitHub readme.md file
+
+
+Next Procedure:
+(1) Now if You deploy that project then it will work within same network (that means you connect with other participants within same network)
+
+(2) To communicate with other participants of different network you need to build TURN server.
+
+(3) To check various Security issues
+
+(4) Noise reduction
+
+N.B: Please respect other's Programmer. Happy Coding...
